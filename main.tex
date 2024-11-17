@@ -1,0 +1,469 @@
+%%\RequirePackage{fix-cm} %%Dla nietypowych rozmiarów czcionki do umieszzczenia przed \documentclass
+%%\fontsize{<fontsize>}{<baselineskip>}\selectfont 
+
+\documentclass[a4paper,12pt,twoside,polish]{book}
+\usepackage[a4paper,left=30mm,right=25mm,top=25mm,bottom=25mm,includefoot=false,includehead=false]{geometry}
+
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{enumerate}
+\usepackage{color}
+
+
+\usepackage{pdfpages}%dodawanie do dokumentu plików pdf
+\usepackage{graphicx}
+\usepackage[export]{adjustbox} %%do pozycjonowania plików graficznych
+%%Opcja pdftex dla plików z rozszerzeniami png, jpg, pdf, tif, mps -  pdflatex
+%% domyślnie jest wprowadzona opcja dvips dla plików EPS - kompliacja do DVI i PS
+\usepackage{makeidx}
+\makeindex
+
+
+\usepackage[MeX]{polski}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc} %w przypadku kodowania UTF-8
+
+%albo
+%usepackage[cp1250]{inputenc} %w przypadku kodowania windows-1250
+
+\usepackage{tkz-graph}
+\usetikzlibrary{arrows}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{calc}
+\usetikzlibrary{shadows}
+\usetikzlibrary{external}
+\usepackage{circuitikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+%%\usepackage{hyperref}
+
+%%dodanie kropek po tytułach sekcji (section) w spisie treści; w stylu article nowe, inny odstęp kropek
+\usepackage{tocloft}
+\renewcommand\cftchapaftersnum{.}% 
+\renewcommand\cftchapdotsep{\cftdotsep}%
+
+%%Interlinia. Zgodnie z Rozporzadzeniem możliwe ustawienia od 1.0 do 1.5
+%%Dobra opcja to 1.2 
+\renewcommand{\baselinestretch}{1.2} %%możliwe od 1.0 do 1.5
+
+%%%THEOREMS AND ENVIROS%%%
+\theoremstyle{definition}
+\newtheorem{definition}{Definicja}[section]
+\newtheorem{problem}{Problem}[section]
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Twierdzenie}[section]
+\newtheorem{lemma}{Lemat}[section]
+\newtheorem{corollary}{Wniosek}[section]
+\newtheorem{remark}{Uwaga}[section]
+\newtheorem{observation}{Obserwacja}[section]
+
+\theoremstyle{definition}
+\newtheorem{example}{Przykład}[section]
+
+
+% \newtheorem{theorem}{\small\bf Twierdzenie}[chapter]
+% \newtheorem{lemma}[twierdzenie]{\small\bf Lemat}
+% \theoremstyle{remark}
+% \newtheorem{remark}[twierdzenie]{\small\bf Uwaga}
+
+% \theoremstyle{definition}
+% \newtheorem{definition}[twierdzenie]{\small\bf Definicja}
+% \newtheorem{corollary}[twierdzenie]{\small\bf Wniosek}
+% \newtheorem{example}[twierdzenie]{\small\bf Przykład}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\N}{\mathbb{N}}
+\renewcommand{\Re}{\operatorname{Re}}
+\newcommand{\Sp}{\textnormal{Sp}}
+\newcommand{\nn}{\nonumber}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\f}{\varphi}
+\newcommand{\be}{\begin{eqnarray}}
+\newcommand{\ee}{\end{eqnarray}}
+\newcommand{\bd}{\begin{eqnarray*}}
+\newcommand{\ed}{\end{eqnarray*}}
+
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Imm}{Im}
+\DeclareMathOperator{\Dom}{Dom}
+\DeclareMathOperator{\tr}{tr}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Poniżej dostosowanie stylu book tak aby każdy rozdział
+%%% zaczynał się od nieparzystej strony. To powoduje wstawienie 
+%%% na poprzedniej stronie kolejnej pustej parzystej strony
+%%% z atrybutami poprzedniego rozdziału. Niżej dodatkowo
+%%% dostosowanie stylu, które kasuje tekst z nagłówka
+%%% i stopki poprzedniej strony.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setlength{\headheight}{13.6pt}
+\usepackage{fancyhdr} %% aby zmienić nagłówek i stopkę
+\pagestyle{fancy}
+\fancyhead{}
+\fancyfoot{}
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter\ #1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+\fancyfoot[LE,RO]{\normalfont  \thepage}
+\fancyhead[RO]{\normalfont \small \itshape \rightmark}
+\fancyhead[LE]{\normalfont \small \itshape \leftmark}
+\fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}}
+\makeatletter
+\def\clearpage{\ifvmode\ifnum\@dbltopnum=\m@ne\ifdim\pagetotal<\topskip\hbox{}\fi\fi\fi\newpage\write\m@ne{}\vbox{}\penalty-\@Mi\thispagestyle{empty}}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[figurename=Rys.]{caption}
+\DeclareCaptionFormat{custom}
+{\textbf{#1#2}{\small #3}}
+\captionsetup{format=custom}
+
+
+\begin{document}
+
+\includepdf{moja_strona_tytulowa.pdf}%%wczytanie strony tytułowej, którą trzeba zapisać w formacie pdf
+
+\newpage
+\thispagestyle{empty} 
+{\color{white}-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\thispagestyle{empty}
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{  }
+\addcontentsline{toc}{chapter}{Streszczenie}
+\addcontentsline{toc}{chapter}{Słowa kluczowe}
+\begin{center}
+\begin{normalsize}
+{\textbf{Streszczenie}}
+\end{normalsize} %%Streszczenie jest wymagane
+\end{center}
+\begin{quotation} %%maksymalnie 2000 znaków razem ze spacjami
+\noindent Tekst streszczenia pracy dyplomowej. 
+\end{quotation}
+\vspace{3.5cm}
+\begin{center}
+\begin{normalsize}{\textbf{Słowa kluczowe}}\end{normalsize} %%Słowa kluczowe w języku polskim są wymagane
+\end{center}
+\begin{quotation}
+\noindent Słowa kluczowe, słowa kluczowe, słowa kluczowe, słowa kluczowe.%%do pięciu słów
+\end{quotation}
+\vspace{3.5cm}
+\begin{center}
+\begin{normalsize}{\textbf{Keywords}}\end{normalsize} %%Słowa kluczowe w języku angielskim. 
+\end{center}
+\begin{quotation}
+\noindent Słowa kluczowe w języku angielskim.%%do pięciu słów
+\end{quotation}
+\clearpage
+
+
+\chapter*{Wstęp}\label{wstep} %%Wymagany
+\markboth{Wstęp}{Wstęp}
+\addcontentsline{toc}{chapter}{Wstęp}
+\     %razem z pustą linią niżej powoduje akapit (tutaj na początku rozdziału Wstęp)
+
+,,We wstępie należy zarysować ogólne tło tematu pracy (badanego problemu, projektu), wskazać przesłanki wyboru tematu pracy, określić problematykę" (Z Zarządzenia Nr 75/2022 Rektora Politechniki Łódzkiej z 22 grudnia 2022 r., Załącznik nr 10).
+
+
+
+
+
+
+
+
+
+\newpage
+Druga strona wstępu. 
+
+\newpage
+Trzecia strona wstępu.
+
+\chapter*{Cel i zakres pracy} %%Wymagane
+\markboth{Cel i zakres pracy}{Cel i zakres pracy}
+\addcontentsline{toc}{chapter}{Cel i zakres pracy}
+\     %razem z pustą linią niżej powoduje akapit (tutaj na początku rozdziału Wstęp)
+
+Zgodnie z Załącznikiem nr 10 do Regulaminu dyplomowania w Politechnice Łódzkiej do Zarządzenia Nr 75/2022 Rektora Politechniki Łódzkiej z 22 grudnia 2022 r. część główna pracy dyplomowej musi zawierać cel i zakres pracy. Należy przedstawić to co było oczekiwanym rezultatem prowadzonych badań oraz zaprezentować zakres pracy, badania, działania jakie trzeba było wykonać aby postawiony cel osiągnąć. 
+
+\newpage
+Cel i zakres pracy -- druga strona.
+
+
+\chapter{Preliminaria}\label{pre}
+
+
+\section{Sekcja 1}
+  
+
+
+\chapter{Tytuł rozdziału drugiego}
+
+\section{Sekcja 1}
+
+\section{Sekcja 2}
+
+\section{Zapisywanie kodu źródłowego procedur}
+
+Kody źródłowe procedur lub funkcji zapisanych na przykład w systemie R lub Matlab można zapisać w systemie {\LaTeX} wykorzystując środowisko \verb+verbatim+. Na przykład:
+\begin{verbatim}
+function[wynik]=SumaKwadratow(N)
+%Suma kwadratów liczb 1,2,...,N.
+
+wynik=0;
+odd=-1;
+term=0;
+
+for i=1:N
+   odd=odd+2;
+   term=term+odd;
+   wynik=wynik+term;
+endfor
+endfunction
+\end{verbatim}
+
+\noindent Ewentualnie można zastosować tekst maszynowy korzystając z polecenia \verb+\texttt+.
+
+
+
+\section{Rysunki}
+\begin{figure}[!ht]
+    \centering
+\begin{tikzpicture}[scale=0.7]
+\draw [->](0,-5)--(0,2);
+\draw [->](0,0)--(11,0);
+\draw (10.9,-0.5) node {$n$};
+\draw (-.7,2) node {$w$};
+\draw (10.6,2) node {\footnotesize{$X^u$}};
+\draw (9.5,-0.4) node {\footnotesize{$1$}};
+\draw [fill] (0,0) circle (3pt);
+\draw [fill] (9,0) circle (3pt);
+\draw (9,0)--(9,-4);
+\draw (9,-4)--(0,0);
+\draw (10.5,-2) node {\footnotesize{Bok I}};
+\draw (4.5,0.7) node {\footnotesize{Bok II}};
+\draw (3.5,-2.5) node {\footnotesize{Bok III}};
+\draw [->] (6,0.5) -- (6,-0.5);
+\draw [->] (9.5,-1) -- (8.5,-2);
+\draw [->] (6.5,-3.3) -- (5.7,-2.2);
+\draw  [black] (0,0) to  [out=-18,in=242] node[currarrow, pos=0.5, xscale=-1, sloped, scale=1] {} (9,0);
+\draw [dashed] (10,2)--(6.5,-5);
+\end{tikzpicture}
+    \caption{Zbiór dodatnio niezmienniczy modelu wraz z zaznaczoną orbitą heterokliniczną.}
+    \label{rysmodelfktrojkat}
+\end{figure}
+
+%Dodawanie pliku graficznego
+\begin{figure}
+\centering
+\includegraphics[height=5.8cm]{rozm 6.jpg}
+\caption{Portret fazowy układu z zaznaczonymi podprzestrzeniami stycznymi $X^s$ oraz $X^u$ oraz rozmaitością stabilną i niestabilną.}
+\label{rys rozm 6}
+\end{figure}
+
+Rysunek \ref{rysmodelfktrojkat} pokazuje zbiór dodatnio niezmienniczy rozważanego modelu wraz z~zaznaczoną orbitą heterokliniczną.
+
+Wiele przykładów rysunków tworzonych z wykorzystaniem systemu {\LaTeX} można odszukać na przykład w książce \cite{Goossens-Rahtz-Mittelbach}.
+
+\section{Cytowania}
+
+Spis literatury wykorzystywanej w pracy jest obowiązkowym elementem. Spisie literatury umieszczamy tylko te pozycje, do których odnosimy się w pracy. W miejscu odniesienia się do umieszczamy symbol jakim oznaczona jest dana pozycja w spisie literatury.
+
+Do poszczególnych pozycji ze spisu literatury odnosimy się za pomocą polecenia \verb+\cite+. 
+
+Na przykład polecenie \verb+\cite{Banasiak-Tchamga}+ generuje w pliku pdf następujący symbol cytowania \cite{Banasiak-Tchamga}.
+
+Zalecany jest jednolity styl typu autor--data odwoływania się do źródeł. Informacje na temat stylu typu autor--data są zamieszczone na stronach Biblioteki Politechniki Łódzkiej pod adresem
+\bd
+\text{http://bg.p.lodz.pl/bibliografia-zalacznikowa}
+\ed
+
+
+
+%%\newpage
+\section{Tabele}
+
+\begin{table}[!ht]
+\centering
+\begin{tabular}{|c|c|c|}
+
+\hline
+   Parametr & Wartość & Jednostka \\
+   \hline \hline
+   $r_{1}$ & 0.514 & $\frac{1}{\text{dni}}$ \\
+   \hline
+   $r_{2}$ & 0.18 & $\frac{1}{\text{dni}}$ \\
+   \hline
+   $K_{1}$ & 9.8039 $\cdot$ 10$^{8}$ & komórki \\
+   \hline
+   $K_{2}$ & 10$^{9}$ & komórki \\
+   \hline
+   $\delta$ & 0.2 & $\frac{\text{komórka}}{\text{dni} \cdot \text{pg/ml}}$\\
+   \hline
+   $m$ & 10$^{5}$ & komórki \\
+   \hline
+   $a$ & 0.1 & $\frac{1}{\text{dni}}$\\
+   \hline
+   $r$ & 9.6 $\cdot$ 10$^{3}$ & $\frac{\text{komórka}}{\text{dni}}$\\
+   \hline
+   $k$ & 5 $\cdot$ 10$^{-11}$ & $\frac{1}{\text{dzień komórki}}$\\
+   \hline
+   $c_{1}$ & 10$^{-7}$ & $\frac{1}{\text{dzień komórki}}$\\
+   \hline
+   $\beta$ & 0.09 & $\frac{\text{komórka}}{\text{dni} \cdot \text{pg/ml}}$\\
+   \hline
+   $\eta$ & 10$^{3}$ & komórki\\
+   \hline
+   $\nu$ & 10$^{-3}$ & $\frac{1}{\text{liczba cząsteczek}}$\\
+   \hline
+   $\alpha$ & 9 & $\frac{\text{pg/ml}}{\text{dni} \cdot \text{komórka}^{2}}$\\
+   \hline
+   $b$ & 10$^{-3}$ & $\frac{1}{\text{liczba cząsteczek}}$\\
+   \hline
+   $\mu$ & 34 & $\frac{1}{\text{dni}}$\\
+   \hline
+   $c$ & 5000 & $\frac{\text{liczba cząsteczek}}{\text{dni} \cdot \text{komórki}}$\\
+   \hline
+   $d$ & 8.3178 & $\frac{1}{\text{dni}}$\\
+   \hline
+   $d_{1}$ & 1.1 $\cdot$ 10$^{-10}$ & $\frac{\text{komórka}}{\text{dni}}$\\
+   \hline
+   $d_{2}$ & 4.8 $\cdot$ 10$^{-10}$ & $\frac{\text{komórka}}{\text{dni}}$\\
+   \hline
+\end{tabular}
+\caption{ Wartości parametrów modelu.}
+\label{tabela_2}
+\end{table}
+
+W tabeli \ref{tabela_2} przedstawiono wartości parametrów omawianych w pracy.
+
+
+\subsection{Wyliczenia}
+
+Wyliczenia powinny mieć w stałej pracy taki sam styl (na przykład z użyciem kropek albo myślników). wyliczenia tworzywmy w środowisku \verb+itemize+. Na przykład:
+
+\begin{enumerate}
+\item Tekst w punkcie pierwszym.
+\item Tekst w punkcie drugim:
+        \begin{itemize}
+        \item pierwszy podpunkt punktu drugiego,
+        \item drugi podpunkt punktu drugiego,
+        \item trzeci podpunkt punktu drugiego.
+        \end{itemize}
+\item Tekst w punkcie trzecim:
+        \begin{itemize}
+        \item pierwszy podpunkt punktu trzeciego,
+        \item drugi podpunkt punktu trzeciego.
+        \end{itemize}
+\end{enumerate}
+
+\noindent Inny przykład z wykorzystaniem tylko numeracji:
+
+\begin{enumerate}
+\item Punkt pierwszy:
+   \begin{enumerate}
+   \item podpunkt pierwszy,
+   \item podpunkt drugi.
+   \end{enumerate}
+\item Punkt 2.
+\item Punkt 3.
+\begin{enumerate}
+   \item podpunkt pierwszy punktu trzeciego,
+   \item podpunkt drugi punktu trzeciego.
+   \end{enumerate}
+\item Punkt 4.
+\end{enumerate}
+
+Można również zdefiniować własną numerację. Na przykład:
+
+\begin{enumerate}
+\item[a$_{1}$.] Punkt pierwszy.
+\item[a$_{2}$.] Punkt drugi.
+\end{enumerate}
+
+\chapter*{Podsumowanie} %%Podsumowanie jest wymagane
+\markboth{Podsumowanie}{Podsumowanie}
+\addcontentsline{toc}{chapter}{Podsumowanie} %%Dodanie tytułu rozdziału Podsumowanie do spisu treści
+
+Część główna pracy powinna zawierać podsumowanie -- zawierające syntezę wniosków opartą na udowodnionych przesłankach i podsumowanie wyników podjętego zagadnienia/rozpoznania badawczego.
+
+Należy dodać informację o tym co dyplomant wykonał samodzielnie, jakie nowe rezultaty lub interpretacje zostały uzyskane.
+
+\newpage
+Druga strona podsumowania.
+
+
+\newpage
+\renewcommand{\bibname}{Literatura} %%Spis literatury jest wymagany
+\addcontentsline{toc}{chapter}{Literatura} %%Dodanie sekcji Literatura do spisu treści
+\begin{thebibliography}{}
+
+\end{thebibliography}
+
+
+
+\newpage
+\clearpage
+\thispagestyle{empty}
+
+
+
+\addcontentsline{toc}{chapter}{Spis rysunków} %%Dodanie sekcji Spis rysunków do spisu treści
+
+\listoffigures  %%Spis rysunków nie jest wymagany
+
+\bigskip
+\bigskip
+\bigskip
+
+\addcontentsline{toc}{chapter}{Spis tabel} %%Dodanie sekcji Spis tabel do spisu treści
+\listoftables %%Spis tabel nie jest wymagany
+
+\clearpage
+\newpage
+
+{\color{white}-}
+
+
+{\color{white}-}
+
+
+{\color{white}-}
+
+
+
+%%Poniżej przykład spisu symboli z ich opisem. Nie jest wymagany.
+{\noindent{\huge{\textbf{Spis symboli i oznaczeń}}}}
+%%Spis symboli i oznaczeń nie jest wymagany
+\addcontentsline{toc}{chapter}{Spis symboli i oznaczeń}
+{\color{white}-}
+
+
+{\color{white}-}
+
+
+{\color{white}-}
+
+
+\begin{tabular}{cp{0.8\textwidth}}
+$X^{\mathbb{N}}$ &  Zbi\'{o}r ciągów o wartościach w X \\
+$L_{m}^{n}(\mathbb{R})$ &  Zbi\'{o}r wszystkich macierzy o $m$ wierszach i $n$ kolumnach o warto\'{s}ciach w pierścieniu liczb rzeczywistych \\
+
+\end{tabular}
+
+
+
+\newpage
+\addcontentsline{toc}{chapter}{Skorowidz}
+\printindex %%Skorowidz nie jest wymagany
+
+\end{document}
