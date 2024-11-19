@@ -85,10 +85,10 @@ grad = nd.Gradient(f)(p)
 
 
 # title = """$f(x, y) = \\frac{1}{10}\\left(x^4 + 2x^3 - 5x^2 + 7x - 6e^x + y^4 + 2y^3 - 2y^2 + 7y - 6e^y \\right)$"""
-title = """$f(x, y) = \\frac{1}{10}\\left(x^4 + 2x^3 - 5x^2 + 7x - 6e^x + y^4 + 2y^3 - 2y^2 + 7y - 6e^y \\right)$
-$\\nabla f(%.1f, %.1f) = [%.3f, %.3f], \\ \\ lr = %.1f, \\ \\ motion = lr \\cdot \\nabla f(%.1f, %.1f)$""" % (*p, *grad, lr, *p)
+# title = """$f(x, y) = \\frac{1}{10}\\left(x^4 + 2x^3 - 5x^2 + 7x - 6e^x + y^4 + 2y^3 - 2y^2 + 7y - 6e^y \\right)$
+# $\\nabla f(%.1f, %.1f) = [%.3f, %.3f], \\ \\ lr = %.1f, \\ \\ motion = lr \\cdot \\nabla f(%.1f, %.1f)$""" % (*p, *grad, lr, *p)
 
-ax.set_title(title)
+# ax.set_title(title)
 # ax.text(*(p-0.1), f(p), s="$p(%.1f, %.1f, %.2f)$" % (*p, f(p)), fontsize=7)
 ax.set_xlabel('x')
 ax.set_ylabel('y')
@@ -103,7 +103,7 @@ for i in range(1):
     ax.scatter(*p, f(p), s=20, color="red", zorder=0)
     ax.text(*(p-0.1), f(p), s="$p(%.1f, %.1f, %.2f)$" % (*p, f(p)), fontsize=7)
     # minimize(f, p, max_steps=1)
-    maximize(f, p, max_steps=1)
+    maximize(f, p, max_steps=15)
 
 
 plt.show()
